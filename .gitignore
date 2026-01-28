@@ -1,0 +1,134 @@
+# =============================================================================
+# Git Ignore for Terraform Projects
+# =============================================================================
+# Prevents accidental commit of sensitive data, credentials, and build artifacts
+#
+# CRITICAL: Never commit:
+#   - Private SSH keys (*.pem, *.key, *_key)
+#   - Terraform state files (*.tfstate*)
+#   - Variable files with values (*.tfvars)
+#   - AWS credentials files
+#   - API keys and secrets
+# =============================================================================
+
+# ==================== TERRAFORM ARTIFACTS ====================
+# Terraform working directory
+.terraform/
+.terraform.lock.hcl
+
+# Terraform state files (CRITICAL - contains secrets!)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+terraform.tfstate*
+
+# Terraform override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform variable files with values
+*.tfvars
+*.tfvars.json
+!example.tfvars
+!example.tfvars.json
+
+# Terraform crash logs
+crash.log
+crash.*.log
+
+# Terraform CLI cache
+.terraform.d/
+
+# ==================== SSH KEYS & CREDENTIALS (CRITICAL) ====================
+# Private keys (NEVER commit these!)
+*.pem
+*.key
+*_key
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ecdsa
+~/.ssh/*
+!.ssh/config
+
+# Public keys (can be committed, but be careful)
+# *_key.pub  # Uncomment to exclude
+
+# AWS Credentials
+.aws/
+~/.aws/
+
+# Environment variables with secrets
+.env
+.env.local
+.env.*.local
+
+# ==================== IDE & EDITOR ====================
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+.classpath
+.project
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vimrc
+.swp
+*.swp
+*~
+.~*
+
+# ==================== OS & BUILD FILES ====================
+Thumbs.db
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# ==================== LOGS ====================
+*.log
+logs/
+*.out
+
+# ==================== TEMPORARY FILES ====================
+*.tmp
+*.bak
+*.backup
+*~
+.tmp/
+
+# ==================== CI/CD ====================
+.github/workflows/.env
+.gitlab-ci.yml.local
+
+# ==================== DOCUMENTATION ====================
+# Local documentation that shouldn't be tracked
+local-notes/
+scratch/
+temp/
+
+# ==================== SENSITIVE PATTERNS ====================
+# Catch any missed secrets with these patterns
+*secret*
+*password*
+*credential*
+*token*
+*key*
+.credentials
+
+# ==================== DIRECTORY EXCLUSIONS ====================
+node_modules/
+venv/
+env/
+__pycache__/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
